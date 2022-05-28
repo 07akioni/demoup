@@ -30,7 +30,7 @@
   },
   "peerDependencies": {
     "react": ">=17",
-    "react-router": ">=6"
+    "react-router-dom": ">=6"
   },
   "dependencies": {
     "css-render": "^0.15.10"
