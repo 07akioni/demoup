@@ -88,7 +88,7 @@ export async function createReactApp(modules: any) {
                   return (
                     <div
                       className={`demoup-menu-item ${
-                        matchPath(childOption.path, pathname)
+                        matchPath(encodeURI(childOption.path), pathname)
                           ? "demoup-menu-item--active"
                           : ""
                       }`}
