@@ -1,0 +1,39 @@
+{
+  "name": "demoup",
+  "version": "0.1.0",
+  "description": "Create react component demo app with vite in a simple step.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite -c demo/vite.config.ts --host",
+    "build": "rm -rf es && tsc -p tsconfig.build.json",
+    "release": "pnpm run build && pnpm publish"
+  },
+  "keywords": [
+    "component",
+    "demo"
+  ],
+  "author": "07akioni",
+  "license": "MIT",
+  "files": [
+    "es"
+  ],
+  "devDependencies": {
+    "@types/react": "^18.0.9",
+    "@types/react-dom": "^18.0.5",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-router-dom": "^6.3.0",
+    "typescript": "^4.7.2",
+    "vite": "^2.9.9"
+  },
+  "peerDependencies": {
+    "react": ">=17",
+    "react-router": ">=6"
+  },
+  "dependencies": {
+    "css-render": "^0.15.10"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  }
+}

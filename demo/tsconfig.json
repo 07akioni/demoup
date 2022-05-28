@@ -1,0 +1,9 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "demoup": ["../src/index.ts"]
+    }
+  },
+  "include": ["*"]
+}
