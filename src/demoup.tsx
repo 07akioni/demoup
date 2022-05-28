@@ -56,8 +56,9 @@ export async function createMenuOptions(modules: any) {
         if (exportName === "config") return;
         optionGroup.children.push({
           title: exportValue.title || exportName,
-          path:
-            paths[i].slice(1).replace(/\.demo\.tsx$/, "") + "/" + exportName,
+          path: encodeURI(
+            paths[i].slice(1).replace(/\.demo\.tsx$/, "") + "/" + exportName
+          ),
           Component: exportValue.title ? exportValue.component : exportValue,
         });
       });
@@ -88,7 +89,7 @@ export async function createReactApp(modules: any) {
                   return (
                     <div
                       className={`demoup-menu-item ${
-                        matchPath(encodeURI(childOption.path), pathname)
+                        matchPath(childOption.path, pathname)
                           ? "demoup-menu-item--active"
                           : ""
                       }`}

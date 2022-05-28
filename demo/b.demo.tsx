@@ -15,3 +15,7 @@ export const tryIt = defineDemo({
     return <div>随便试试</div>;
   },
 });
+
+export const 中文名 = () => {
+  return <div>中文名</div>;
+};
