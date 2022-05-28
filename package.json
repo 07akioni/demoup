@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "description": "Create react component demo app with vite in a simple step.",
   "type": "module",
+  "main": "es/index.js",
+  "types": "es/idnex.d.ts",
   "scripts": {
     "dev": "vite -c demo/vite.config.ts --host",
     "build": "rm -rf es && tsc -p tsconfig.build.json",
