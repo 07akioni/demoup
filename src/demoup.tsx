@@ -57,7 +57,7 @@ export async function createMenuOptions(modules: any) {
         optionGroup.children.push({
           title: exportValue.title || exportName,
           path:
-            paths[i].slice(1).replace(/\.demoup\.tsx$/, "") + "/" + exportName,
+            paths[i].slice(1).replace(/\.demo\.tsx$/, "") + "/" + exportName,
           Component: exportValue.title ? exportValue.component : exportValue,
         });
       });
