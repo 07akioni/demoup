@@ -20,7 +20,7 @@ createReactApp(modules).then((app) => {
 ```
 
 ```ts
-// *.demoup.tsx
+// *.demo.tsx
 export const config = {
   title: "Demo",
 };
