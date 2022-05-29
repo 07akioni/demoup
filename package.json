@@ -1,5 +1,5 @@
 {
-  "name": "demoup-test",
+  "name": "demoup",
   "version": "0.2.4",
   "description": "Create react component demo app with vite in a simple step.",
   "type": "module",
