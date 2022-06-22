@@ -1,8 +1,8 @@
-interface PageConfig {
+export interface PageConfig {
   title: string;
 }
 
-interface DemoConfig {
+export interface DemoConfig {
   title: string;
   component: any;
 }
