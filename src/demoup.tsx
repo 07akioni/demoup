@@ -1,6 +1,6 @@
-import React from "react";
+import React, { ComponentType } from "react";
 import {
-  BrowserRouter,
+  HashRouter,
   Routes,
   Route,
   useNavigate,
@@ -25,52 +25,38 @@ function NotFound() {
   );
 }
 
-export async function createMenuOptions(modules: any) {
-  const _modules: Record<
-    string,
-    () => Promise<{
-      config: {
-        title: string;
-      };
-    }>
-  > = modules;
-  const demoupGroupResolvers: Promise<Record<string, any>>[] = [];
-  Object.values(_modules).forEach((module) => {
-    demoupGroupResolvers.push(module());
+type DemoupGroup = {
+  title: string;
+  children: Array<{
+    title: string;
+    path: string;
+    Component: any;
+  }>;
+};
+export function createMenuOptions(
+  config: Array<{ name: string; module: Module }>
+): DemoupGroup[] {
+  return config.map(({ name, module }) => {
+    return {
+      title: name,
+      children: Object.keys(module).map((key) => {
+        return {
+          title: key,
+          path: `${name}-${key}`,
+          Component: module[key],
+        };
+      }),
+    };
   });
-  const paths = Object.keys(modules);
-  const options = (await Promise.all(demoupGroupResolvers)).map(
-    (demoupGroup, i) => {
-      const optionGroup: {
-        title: string;
-        children: Array<{
-          title: string;
-          path: string;
-          Component: any;
-        }>;
-      } = {
-        title: demoupGroup.config.title,
-        children: [],
-      };
-      Object.entries(demoupGroup).forEach(([exportName, exportValue]) => {
-        if (exportName === "config") return;
-        optionGroup.children.push({
-          title: exportValue.title || exportName,
-          path: encodeURI(
-            paths[i].slice(1).replace(/\.demo\.tsx$/, "") + "/" + exportName
-          ),
-          Component: exportValue.title ? exportValue.component : exportValue,
-        });
-      });
-      return optionGroup;
-    }
-  );
-  return options;
 }
 
-export async function createReactApp(modules: any) {
-  const options = await createMenuOptions(modules);
-  const routeOptions: typeof options[0]["children"] = [];
+type Module = Record<string, ComponentType>;
+
+export function createReactApp(
+  config: Array<{ name: string; module: Module }>
+) {
+  const options = createMenuOptions(config);
+  const routeOptions: (typeof options)[0]["children"] = [];
   options.forEach((option) => {
     routeOptions.push(...option.children);
   });
@@ -89,7 +75,10 @@ export async function createReactApp(modules: any) {
                   return (
                     <div
                       className={`demoup-menu-item ${
-                        matchPath(childOption.path, pathname)
+                        matchPath(
+                          encodeURIComponent(childOption.path),
+                          pathname
+                        )
                           ? "demoup-menu-item--active"
                           : ""
                       }`}
@@ -126,10 +115,10 @@ export async function createReactApp(modules: any) {
   };
   const AppWithRouter = () => {
     return (
-      <BrowserRouter>
+      <HashRouter>
         <App />
-      </BrowserRouter>
+      </HashRouter>
     );
   };
-  return <AppWithRouter />;
+  return AppWithRouter;
 }

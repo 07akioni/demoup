@@ -1,6 +1,6 @@
 # demoup
 
-Create react component demo app with vite in a simple step.
+Create a react component demo app in a simple step.
 
 ## Usage
 
@@ -8,23 +8,16 @@ Create react component demo app with vite in a simple step.
 // index.ts
 import { createRoot } from "react-dom/client";
 import { createReactApp } from "demoup";
+import demos from "./*.demo.tsx";
 
-// `import.meta.glob` is a vite-only feature. For glob pattern, any suffix is
-// okay but we recommend using `demo.tsx`.
-const modules = import.meta.glob("./**/*.demo.tsx");
+const App = createReactApp([{ name: "Custom Demo Name", module: demos }]);
 
-createReactApp(modules).then((app) => {
-  const root = createRoot(document.getElementById("app")!);
-  root.render(app);
-});
+const root = createRoot(document.getElementById("app")!);
+root.render(<App />);
 ```
 
 ```ts
 // *.demo.tsx
-export const config = {
-  title: "Demo",
-};
-
 export const DemoA = () => <div>DemoA</div>;
 
 export const DemoB = () => <div>DemoA</div>;
