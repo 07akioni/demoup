@@ -65,9 +65,7 @@ export function createReactApp(
                 />
               );
             })}
-            <Route key="/" path="/">
-              <Navigate to={firstPath} />
-            </Route>
+            <Route key="/" path="/" element={<Navigate to={firstPath} />} />
             <Route key="*" path="*" element={<NotFound />} />
           </Routes>
         </div>
