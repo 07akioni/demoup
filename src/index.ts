@@ -1,1 +1,1 @@
-export { createReactNodeForRspack } from "./createReactNode";
+export { createReactNodeForRspack } from "./createReactNode.js";

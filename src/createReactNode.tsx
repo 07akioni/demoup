@@ -1,6 +1,6 @@
 import React from "react";
-import { Module } from "./domainTypes";
-import { createReactApp } from "./createReactApp/index";
+import { Module } from "./domainTypes.js";
+import { createReactApp } from "./createReactApp/index.js";
 
 function createReactNode(config: Array<{ path: string; module: Module }>) {
   const App = createReactApp(config);
@@ -13,8 +13,8 @@ function createReactNode(config: Array<{ path: string; module: Module }>) {
  * Example:
  *
  * ```ts
- * createReactNodeForRspack(
- *   require.context(".", true, /^*\.preview\.tsx$/, "sync")
+ * createRoot(document.getElementById('root')!).render(
+ *   createReactNodeForRspack(require.context('.', true, /^*\.preview\.tsx$/, 'sync'))
  * )
  * ```
  */

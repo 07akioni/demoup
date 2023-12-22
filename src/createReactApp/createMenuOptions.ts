@@ -1,4 +1,4 @@
-import { DemoGroup, Module } from "../domainTypes";
+import { DemoGroup, Module } from "../domainTypes.js";
 
 function createTitleFromPath(path: string) {
   let fileName = path.split("/").pop() || path;

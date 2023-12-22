@@ -7,12 +7,14 @@ import {
   useLocation,
   matchPath,
 } from "react-router-dom";
-import { style } from "./style";
-import { Module } from "../domainTypes";
-import { createMenuOptions } from "./createMenuOptions";
-import { NotFound } from "./notFound";
+import { style } from "./style.js";
+import { Module } from "../domainTypes.js";
+import { createMenuOptions } from "./createMenuOptions.js";
+import { NotFound } from "./notFound.js";
 
-export function createReactApp(config: Array<{ path: string; module: Module }>) {
+export function createReactApp(
+  config: Array<{ path: string; module: Module }>
+) {
   const options = createMenuOptions(config);
   const routeOptions: (typeof options)[0]["children"] = [];
   options.forEach((option) => {

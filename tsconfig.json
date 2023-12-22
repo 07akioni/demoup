@@ -5,11 +5,11 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "target": "ESNext",
-    "module": "ESNext",
+    "module": "NodeNext",
     "jsx": "react",
     "lib": ["ESNext", "DOM"],
     "declaration": false,
-    "moduleResolution": "node",
+    "moduleResolution": "NodeNext",
     "types": []
   },
   "include": ["src"]
