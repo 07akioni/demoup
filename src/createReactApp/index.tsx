@@ -1,4 +1,4 @@
-import React, { ComponentType } from "react";
+import React from "react";
 import {
   HashRouter,
   Routes,
@@ -8,53 +8,11 @@ import {
   matchPath,
 } from "react-router-dom";
 import { style } from "./style";
+import { Module } from "../domainTypes";
+import { createMenuOptions } from "./createMenuOptions";
+import { NotFound } from "./notFound";
 
-function NotFound() {
-  return (
-    <div
-      style={{
-        fontSize: 64,
-        position: "absolute",
-        left: "50%",
-        top: "50%",
-        transform: "translateX(-50%) translateY(-100%)",
-      }}
-    >
-      🚀
-    </div>
-  );
-}
-
-type DemoupGroup = {
-  title: string;
-  children: Array<{
-    title: string;
-    path: string;
-    Component: any;
-  }>;
-};
-export function createMenuOptions(
-  config: Array<{ name: string; module: Module }>
-): DemoupGroup[] {
-  return config.map(({ name, module }) => {
-    return {
-      title: name,
-      children: Object.keys(module).map((key) => {
-        return {
-          title: key,
-          path: `${name}-${key}`,
-          Component: module[key],
-        };
-      }),
-    };
-  });
-}
-
-type Module = Record<string, ComponentType>;
-
-export function createReactApp(
-  config: Array<{ name: string; module: Module }>
-) {
+export function createReactApp(config: Array<{ path: string; module: Module }>) {
   const options = createMenuOptions(config);
   const routeOptions: (typeof options)[0]["children"] = [];
   options.forEach((option) => {
@@ -69,16 +27,13 @@ export function createReactApp(
         <div className="demoup-aside">
           {options.map((option) => {
             return (
-              <div key={option.title} style={{ marginBottom: 12 }}>
+              <div key={option.id} style={{ marginBottom: 12 }}>
                 <div className="demoup-menu-group-item">{option.title}</div>
                 {option.children.map((childOption) => {
                   return (
                     <div
                       className={`demoup-menu-item ${
-                        matchPath(
-                          encodeURIComponent(childOption.path),
-                          pathname
-                        )
+                        matchPath(childOption.path, pathname)
                           ? "demoup-menu-item--active"
                           : ""
                       }`}

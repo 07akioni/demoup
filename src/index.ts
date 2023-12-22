@@ -1,1 +1,1 @@
-export { createReactApp } from "./demoup";
+export { createReactNodeForRspack } from "./createReactNode";

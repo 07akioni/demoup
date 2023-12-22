@@ -10,7 +10,7 @@ export const style = c([
     overflow: "auto",
     flexShrink: 0,
     flexGrow: 0,
-    borderRight: '1px solid rgba(0, 0, 0, .06)'
+    borderRight: "1px solid rgba(0, 0, 0, .06)",
   }),
   c(".demoup-main", {
     flexGrow: 1,

@@ -4,21 +4,15 @@ Create a react component demo app in a simple step.
 
 ## Usage
 
+Use rspack to serve current app.
+
 ```ts
+import { createReactNodeForRspack } from "demoup";
+
 // index.ts
-import { createRoot } from "react-dom/client";
-import { createReactApp } from "demoup";
-import demos from "./*.demo.tsx";
-
-const App = createReactApp([{ name: "Custom Demo Name", module: demos }]);
-
-const root = createRoot(document.getElementById("app")!);
-root.render(<App />);
-```
-
-```ts
-// *.demo.tsx
-export const DemoA = () => <div>DemoA</div>;
-
-export const DemoB = () => <div>DemoA</div>;
+createRoot(
+  createReactNodeForRspack(
+    require.context(".", true, /^*\.preview\.tsx$/, "sync")
+  )
+).render(document.getElementById("root"));
 ```
