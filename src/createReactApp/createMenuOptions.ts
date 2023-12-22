@@ -6,6 +6,7 @@ function createTitleFromPath(path: string) {
   return fileName
     .replace(/[A-Z]/g, " $&")
     .split(" ")
+    .filter(Boolean)
     .map((v, index) =>
       v
         ? v[0][index === 0 ? "toUpperCase" : "toLowerCase"]() +
@@ -19,19 +20,25 @@ function createTitleFromPath(path: string) {
 export function createMenuOptions(
   // Suppose id is always
   config: Array<{ path: string; module: Module }>
-): DemoGroup[] {
-  return config.map(({ path, module }) => {
+): { options: DemoGroup[]; firstPath: string } {
+  let firstPath = "";
+  const options = config.map(({ path, module }) => {
     return {
       id: path,
       title: createTitleFromPath(path),
       children: Object.keys(module).map((demoId) => {
+        const encodedPath = encodeURIComponent(`${path}-${demoId}`);
+        if (!firstPath) {
+          firstPath = encodedPath;
+        }
         return {
           id: demoId,
           title: createTitleFromPath(demoId),
-          path: encodeURIComponent(`${path}-${demoId}`),
+          path: encodedPath,
           Component: module[demoId],
         };
       }),
     };
   });
+  return { options, firstPath };
 }

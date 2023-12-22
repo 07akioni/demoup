@@ -3,6 +3,9 @@ import { CssRender } from "css-render";
 const { c } = CssRender();
 
 export const style = c([
+  c("body", {
+    margin: 0,
+  }),
   c(".demoup-app", { display: "flex", lineHeight: 1.5, height: "100vh" }),
   c(".demoup-aside", {
     padding: "20px",
@@ -13,6 +16,7 @@ export const style = c([
     borderRight: "1px solid rgba(0, 0, 0, .06)",
   }),
   c(".demoup-main", {
+    overflow: 'auto',
     flexGrow: 1,
     minWidth: 0,
     padding: "32px 24px",

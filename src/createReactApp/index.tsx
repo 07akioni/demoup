@@ -6,6 +6,7 @@ import {
   useNavigate,
   useLocation,
   matchPath,
+  Navigate,
 } from "react-router-dom";
 import { style } from "./style.js";
 import { Module } from "../domainTypes.js";
@@ -15,7 +16,7 @@ import { NotFound } from "./notFound.js";
 export function createReactApp(
   config: Array<{ path: string; module: Module }>
 ) {
-  const options = createMenuOptions(config);
+  const { options, firstPath } = createMenuOptions(config);
   const routeOptions: (typeof options)[0]["children"] = [];
   options.forEach((option) => {
     routeOptions.push(...option.children);
@@ -64,6 +65,9 @@ export function createReactApp(
                 />
               );
             })}
+            <Route key="/" path="/">
+              <Navigate to={firstPath} />
+            </Route>
             <Route key="*" path="*" element={<NotFound />} />
           </Routes>
         </div>
