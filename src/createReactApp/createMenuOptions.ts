@@ -6,11 +6,14 @@ function createTitleFromPath(path: string) {
   return fileName
     .replace(/[A-Z]/g, " $&")
     .split(" ")
-    .map(
-      (v, index) =>
-        v[0][index === 0 ? "toUpperCase" : "toLowerCase"]() + (v.slice(1) || "")
+    .map((v, index) =>
+      v
+        ? v[0][index === 0 ? "toUpperCase" : "toLowerCase"]() +
+          (v.slice(1) || "")
+        : ""
     )
-    .join(" ");
+    .join(" ")
+    .trim();
 }
 
 export function createMenuOptions(
